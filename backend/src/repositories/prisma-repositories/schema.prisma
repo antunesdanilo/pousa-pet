@@ -1,0 +1,71 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["debian-openssl-3.0.x", "native"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Boarding {
+  boardingId         String   @id
+  petId              String
+  checkInDate        DateTime
+  expectedDailyStays Int
+  insertedByUserId   String
+
+  // Relations
+  pet            Pet  @relation(fields: [petId], references: [petId])
+  insertedByUser User @relation(fields: [insertedByUserId], references: [userId])
+}
+
+model Breed {
+  breedId   String @id
+  speciesId String
+  name      String
+
+  // Relations
+  pets    Pet[]
+  species Species @relation(fields: [speciesId], references: [speciesId])
+}
+
+model Pet {
+  petId     String @id
+  tutorId   String
+  speciesId String
+  breedId   String
+  name      String
+
+  // Relations
+  tutor   Tutor      @relation(fields: [tutorId], references: [tutorId])
+  species Species    @relation(fields: [speciesId], references: [speciesId])
+  breed   Breed      @relation(fields: [breedId], references: [breedId])
+  boards  Boarding[]
+}
+
+model Species {
+  speciesId String @id
+  name      String
+
+  // Relations
+  pets  Pet[]
+  Breed Breed[]
+}
+
+model Tutor {
+  tutorId     String @id
+  name        String
+  phoneNumber String
+
+  // Relations
+  pets Pet[]
+}
+
+model User {
+  userId String @id
+  name   String
+
+  // Relations
+  boardings Boarding[]
+}
