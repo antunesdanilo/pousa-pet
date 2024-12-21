@@ -3,6 +3,7 @@ import { CreateStatusDto } from 'src/app/dtos/create-status.dto';
 import { UserRepository } from 'src/repositories/abstract-repositories/user.repository';
 import { UserCreateInput } from '../inputs/user-create.input';
 import { UserCreateData } from 'src/repositories/create-data/user-create.data';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class UserCreateService {
@@ -37,7 +38,7 @@ export class UserCreateService {
 
     // Preparing the data for user creation
     const createData: UserCreateData = {
-      userId: createInput.userId,
+      userId: uuidv4(),
       name: createInput.name,
     };
 
