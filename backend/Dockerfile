@@ -8,13 +8,13 @@ RUN mkdir /usr/share/backend
 WORKDIR /usr/share/backend
 
 # Copia apenas os arquivos necessários para instalar as dependências
-COPY ./backend/package.json ./backend/package-lock.json ./
+COPY ./package.json ./package-lock.json ./
 
 # Instala apenas as dependências de produção com Yarn
 RUN npm install --production
 
 # Copia todos os arquivos para o contêiner
-COPY ./backend/ .
+COPY ./ .
 
 # Faz o build da aplicação NestJS
 RUN npm run build
