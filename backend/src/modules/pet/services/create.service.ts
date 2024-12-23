@@ -73,11 +73,11 @@ export class CreatePetService {
     // Verify the existence of the breed
     const breed = await this.breedRepository.findById(createInput.breedId);
 
-    if (!breed) {
+    if (!breed || breed.speciesId !== createInput.speciesId) {
       throw new HttpException(
         {
           error_code: 'INVALID_DATA',
-          error_description: `A raça com o ID ${createInput.breedId} não foi encontrada.`,
+          error_description: `A raça com o ID ${createInput.breedId} não foi encontrada ou não pertence à espécie informada.`,
         },
         HttpStatus.BAD_REQUEST,
       );
@@ -93,7 +93,7 @@ export class CreatePetService {
     };
 
     // Persist the ride data in the repository
-    this.petRepository.create(createData);
+    await this.petRepository.create(createData);
 
     return { success: true };
   }

@@ -25,7 +25,7 @@ export class BoardingController {
    * @param {string} tutorId - The optional tutor ID to filter pets.
    * @returns {BoardingDto[]} - The pets list.
    */
-  @Get(':tutorId')
+  @Get()
   @ApiOperation({ summary: 'Get pets list filtered by optional tutor ID' })
   @ApiParam({
     name: 'tutorId',

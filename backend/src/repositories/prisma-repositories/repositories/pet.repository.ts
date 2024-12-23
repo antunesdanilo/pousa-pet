@@ -17,17 +17,36 @@ export class PrismaPetRepository implements PetRepository {
       where.tutorId = filterData.tutorId;
     }
 
-    return this.prisma.pet.findMany({ where });
+    return this.prisma.pet.findMany({
+      where,
+      include: {
+        tutor: true,
+        species: true,
+        breed: true,
+      },
+    });
   }
 
   findById(petId: string): Promise<PetDto | undefined> {
     return this.prisma.pet.findUnique({
       where: { petId },
+      include: {
+        tutor: true,
+        species: true,
+        breed: true,
+      },
     });
   }
 
   findByName(name: string): Promise<PetDto | undefined> {
-    return this.prisma.pet.findFirst({ where: { name } });
+    return this.prisma.pet.findFirst({
+      where: { name },
+      include: {
+        tutor: true,
+        species: true,
+        breed: true,
+      },
+    });
   }
 
   async create(createData: PetCreateData): Promise<void> {

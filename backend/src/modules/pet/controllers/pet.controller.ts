@@ -25,7 +25,7 @@ export class PetController {
    * @param {string} [tutorId] - The optional tutor ID to filter pets.
    * @returns {PetDto[]} - The pet list.
    */
-  @Get(':tutorId')
+  @Get()
   @ApiOperation({ summary: 'Get pet list by optional tutor ID' })
   @ApiParam({
     name: 'tutorId',

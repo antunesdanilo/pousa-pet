@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { SpeciesDto } from 'src/modules/species/dtos/species.dto';
 
 export class BreedDto {
   @ApiProperty({
@@ -18,4 +19,16 @@ export class BreedDto {
     example: 'Labrador',
   })
   name: string;
+
+  // relations
+
+  @ApiProperty({
+    description: 'The species of the breed.',
+    type: SpeciesDto,
+    example: {
+      speciesId: 'dc49b5ef-c085-4c05-a2b4-094dbbd7464c',
+      name: 'Cachorro',
+    },
+  })
+  species?: SpeciesDto;
 }
