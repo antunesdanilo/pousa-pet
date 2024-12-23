@@ -17,6 +17,7 @@ RUN npm install --production=false
 COPY ./ .
 
 # Faz o build da aplicação NestJS
+RUN npx prisma generate
 RUN npm run build
 
 # Crias as migrações e inicia o banco de dados com SQLite
