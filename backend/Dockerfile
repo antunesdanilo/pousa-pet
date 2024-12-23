@@ -8,13 +8,13 @@ RUN mkdir /usr/share/backend
 WORKDIR /usr/share/backend
 
 # Copia apenas os arquivos necessários para instalar as dependências
-COPY ./backend/package.json ./backend/package-lock.json ./
+COPY ./package.json ./package-lock.json ./
 
-# Instala apenas as dependências de produção com Yarn
+# Instala apenas as dependências de produção com NPM
 RUN npm install --production
 
 # Copia todos os arquivos para o contêiner
-COPY ./backend/ .
+COPY ./ .
 
 # Faz o build da aplicação NestJS
 RUN npm run build
@@ -24,6 +24,9 @@ WORKDIR /usr/share/backend/dist
 
 # Expõe a porta padrão do NestJS
 EXPOSE 3000
+
+# Crias as migrações e inicia o banco de dados com SQLite
+RUN npx prisma migrate dev
 
 # Comando padrão para rodar o servidor
 CMD ["sh", "-c", "node main.js"]
