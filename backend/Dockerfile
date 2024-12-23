@@ -10,7 +10,7 @@ WORKDIR /usr/share/backend
 # Copia apenas os arquivos necessários para instalar as dependências
 COPY ./package.json ./package-lock.json ./
 
-# Instala apenas as dependências de produção com Yarn
+# Instala apenas as dependências de produção com NPM
 RUN npm install --production
 
 # Copia todos os arquivos para o contêiner
