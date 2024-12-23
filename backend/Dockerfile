@@ -25,5 +25,8 @@ WORKDIR /usr/share/backend/dist
 # Expõe a porta padrão do NestJS
 EXPOSE 3000
 
+# Crias as migrações e inicia o banco de dados com SQLite
+RUN npx prisma migrate dev
+
 # Comando padrão para rodar o servidor
 CMD ["sh", "-c", "node main.js"]
