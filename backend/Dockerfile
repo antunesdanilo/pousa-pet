@@ -1,5 +1,5 @@
 # Usa a imagem Node.js do Docker Hub como base
-FROM node:latest
+FROM node:18
 
 # Cria o diretório para o backend
 RUN mkdir /usr/share/backend
@@ -11,7 +11,7 @@ WORKDIR /usr/share/backend
 COPY ./package.json ./package-lock.json ./
 
 # Instala apenas as dependências de produção com NPM
-RUN npm install --production
+RUN npm install --production=false
 
 # Copia todos os arquivos para o contêiner
 COPY ./ .
@@ -19,14 +19,14 @@ COPY ./ .
 # Faz o build da aplicação NestJS
 RUN npm run build
 
+# Crias as migrações e inicia o banco de dados com SQLite
+RUN npx prisma migrate dev
+
 # Define o diretório para a versão buildada
 WORKDIR /usr/share/backend/dist
 
 # Expõe a porta padrão do NestJS
 EXPOSE 3000
 
-# Crias as migrações e inicia o banco de dados com SQLite
-RUN npx prisma migrate dev
-
 # Comando padrão para rodar o servidor
-CMD ["sh", "-c", "node main.js"]
+CMD ["node",  "main.js"]
