@@ -9,7 +9,7 @@ class BaseApiProvider {
     };
 
     this.axiosInstance = axios.create({
-      baseURL: baseUrl || 'http://192.168.1.15:3000',
+      baseURL: baseUrl || 'http://192.168.10.11:3000',
       headers,
     });
   }

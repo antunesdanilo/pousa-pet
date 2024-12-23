@@ -9,7 +9,7 @@ export interface PetDto {
   breedId: string;
   name: string;
   // relations
-  tutor?: TutorDto;
-  species?: SpeciesDto;
-  breed?: BreedDto;
+  tutor: TutorDto;
+  species: SpeciesDto;
+  breed: BreedDto;
 }

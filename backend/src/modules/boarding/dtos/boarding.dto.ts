@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { PetDto } from 'src/modules/pet/dtos/pet.dto';
 
 export class BoardingDto {
   @ApiProperty({
@@ -32,4 +33,19 @@ export class BoardingDto {
     example: 'f1b59f32-a8ab-4c92-8e7d-5ecb1a76179c',
   })
   insertedByUserId: string;
+
+  // relations
+
+  @ApiProperty({
+    description: 'The pet that is staying',
+    type: PetDto,
+    example: {
+      petId: 'dc49b5ef-c085-4c05-a2b4-094dbbd7464c',
+      tutorId: 'dc49b5ef-c085-4c05-a2b4-094dbbd7464c',
+      speciesId: 'dc49b5ef-c085-4c05-a2b4-094dbbd7464c',
+      breedId: 'dc49b5ef-c085-4c05-a2b4-094dbbd7464c',
+      name: 'Teddy',
+    },
+  })
+  pet?: PetDto;
 }

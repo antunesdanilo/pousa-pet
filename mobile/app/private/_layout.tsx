@@ -120,6 +120,36 @@ const Layout: React.FC = () => {
             ),
           }}
         />
+        <Tabs.Screen
+          name="home/form"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="pets/form"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="tutors/form"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="species/form"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="breeds/form"
+          options={{
+            href: null,
+          }}
+        />
       </Tabs>
     </GestureHandlerRootView>
   );

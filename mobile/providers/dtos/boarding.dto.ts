@@ -8,6 +8,6 @@ export interface BoardingDto {
   expectedDailyStays: number;
   insertedByUserId: string;
   // relations
-  pet?: PetDto;
-  insertedByUser?: UserDto;
+  pet: PetDto;
+  insertedByUser: UserDto;
 }

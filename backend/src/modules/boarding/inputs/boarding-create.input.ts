@@ -1,4 +1,4 @@
-import { IsDate, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class BoardingCreateInput {
@@ -10,7 +10,12 @@ export class BoardingCreateInput {
   })
   petId: string;
 
-  @IsDate({ message: 'A data de entrada do pet está em um formato inválido' })
+  @IsDateString(
+    {},
+    {
+      message: 'A data de entrada do pet está em um formato inválido',
+    },
+  )
   @IsNotEmpty({ message: 'A data de entrada do pet deve ser informada' })
   @ApiProperty({
     description: 'The check-in date.',

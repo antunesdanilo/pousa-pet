@@ -51,7 +51,7 @@ const Register = () => {
   return (
     <View
       style={{
-        ...styles.container,
+        ...styles.containerPadding,
         justifyContent: 'center',
         alignItems: 'center',
         gap: 25,

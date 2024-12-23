@@ -15,10 +15,13 @@ import { Picker } from '@react-native-picker/picker';
 import { Image } from 'expo-image';
 import { styles } from '@/styles';
 import { Button } from 'react-native-paper';
+import { useIsFocused } from '@react-navigation/native';
 
 const userProvider: IUserProvider = new UserProvider();
 
 const Login = () => {
+  const isFocused = useIsFocused();
+
   const dispatch = useAppDispatch();
 
   const router = useRouter();
@@ -47,7 +50,7 @@ const Login = () => {
         setUsers(users);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [isFocused]);
 
   const handleLogin = (userId?: string) => {
     let user: UserDto | undefined;
@@ -70,7 +73,7 @@ const Login = () => {
   return (
     <View
       style={{
-        ...styles.container,
+        ...styles.containerPadding,
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
@@ -101,7 +104,6 @@ const Login = () => {
             key={userId}
             selectedValue={userId}
             onValueChange={(item) => setUserId(item)}
-            style={styles.nativePicker}
           >
             {users.map((user) => (
               <Picker.Item

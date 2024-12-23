@@ -17,12 +17,32 @@ export class PrismaBoardingRepository implements BoardingRepository {
       where.pet.tutorId = filterData.tutorId;
     }
 
-    return this.prisma.boarding.findMany();
+    return this.prisma.boarding.findMany({
+      where,
+      include: {
+        pet: {
+          include: {
+            tutor: true,
+            species: true,
+            breed: true,
+          },
+        },
+      },
+    });
   }
 
   findById(boardingId: string): Promise<BoardingDto | undefined> {
     return this.prisma.boarding.findUnique({
       where: { boardingId },
+      include: {
+        pet: {
+          include: {
+            tutor: true,
+            species: true,
+            breed: true,
+          },
+        },
+      },
     });
   }
 

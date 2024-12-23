@@ -25,8 +25,8 @@ export class CreateBreedService {
     // Checking if a breed with the same name already exists
     const breed = await this.breedRepository.findByName(createInput.name);
 
-    if (breed) {
-      // Throwing an error if a breed with the same name exists
+    if (breed && breed.speciesId === createInput.speciesId) {
+      // Throwing an error if a breed with the same name and same speciesId exists
       throw new HttpException(
         {
           error_code: 'INVALID_DATA',

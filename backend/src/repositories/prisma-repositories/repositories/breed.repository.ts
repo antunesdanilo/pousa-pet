@@ -9,17 +9,21 @@ export class PrismaBreedRepository implements BreedRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   findMany(): Promise<BreedDto[]> {
-    return this.prisma.breed.findMany();
+    return this.prisma.breed.findMany({ include: { species: true } });
   }
 
   findById(breedId: string): Promise<BreedDto | undefined> {
     return this.prisma.breed.findUnique({
       where: { breedId },
+      include: { species: true },
     });
   }
 
   findByName(name: string): Promise<BreedDto | undefined> {
-    return this.prisma.breed.findFirst({ where: { name } });
+    return this.prisma.breed.findFirst({
+      where: { name },
+      include: { species: true },
+    });
   }
 
   async create(createData: BreedCreateData): Promise<void> {
