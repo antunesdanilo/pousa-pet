@@ -11,7 +11,7 @@ export class TestMockPetRepository
   private pets: PetDto[] = [];
 
   injectData(data: PetDto[]): void {
-    this.pets = [...this.pets, ...data];
+    this.pets = data;
   }
 
   findMany = jest.fn().mockImplementation((): Promise<PetDto[]> => {

@@ -9,7 +9,7 @@ class BaseApiProvider {
     };
 
     this.axiosInstance = axios.create({
-      baseURL: baseUrl || 'http://192.168.10.11:3000',
+      baseURL: baseUrl || 'https://pousa-pet.onrender.com',
       headers,
     });
   }

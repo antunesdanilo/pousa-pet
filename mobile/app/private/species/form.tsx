@@ -20,6 +20,15 @@ interface IForm {
 
 const speciesProvider: ISpeciesProvider = new SpeciesProvider();
 
+/**
+ * A component for creating a new species.
+ *
+ * Displays a form with a name input field and allows the user to save a new species.
+ * The modal can be closed either upon successful submission or cancellation.
+ *
+ * @param {ISpeciesFormProps} props The component's props
+ * @returns {JSX.Element} The form modal for creating a species
+ */
 const SpeciesForm: React.FC<ISpeciesFormProps> = ({ show, onClose }) => {
   const formInitialState: IForm = {
     name: '',
@@ -29,6 +38,14 @@ const SpeciesForm: React.FC<ISpeciesFormProps> = ({ show, onClose }) => {
     values: formInitialState,
   });
 
+  /**
+   * Handles the form submission for creating a new species.
+   *
+   * Sends a request to create the species and shows a success or error message.
+   * Resets the form and calls the `onClose` function after successful submission.
+   *
+   * @param {IForm} formData The form data containing the species name
+   */
   const onRegister: SubmitHandler<IForm> = (formData: IForm) => {
     const createInput: SpeciesCreateInput = {
       name: formData.name.trim(),
@@ -51,6 +68,9 @@ const SpeciesForm: React.FC<ISpeciesFormProps> = ({ show, onClose }) => {
       });
   };
 
+  /**
+   * Handles the cancel action and resets the form.
+   */
   const handleCancel = () => {
     onClose();
     form.reset();

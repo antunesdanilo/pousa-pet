@@ -41,6 +41,22 @@ interface IForm {
 const boardingProvider: IBoardingProvider = new BoardingProvider();
 const petProvider: IPetProvider = new PetProvider();
 
+/**
+ * BoardingForm Component
+ *
+ * A form to register a new pet boarding. Allows the user to select a pet, specify the check-in date,
+ * and indicate the expected number of daily stays. Includes integration with a pet registration form
+ * in case the desired pet is not listed.
+ *
+ * @component
+ *
+ * @example
+ * <BoardingForm show={true} onClose={(hasChanges) => console.log(hasChanges)} />
+ *
+ * @param {Object} props - Component properties.
+ * @param {boolean} props.show - Controls the visibility of the modal form.
+ * @param {function(boolean):void} props.onClose - Function called when the form is closed. Receives a boolean indicating if there were changes.
+ */
 const BoardingForm: React.FC<IBoardingFormProps> = ({ show, onClose }) => {
   const { user } = useAppSelector<UserSliceState>(selectUser);
 
@@ -67,6 +83,12 @@ const BoardingForm: React.FC<IBoardingFormProps> = ({ show, onClose }) => {
     }
   }, [show]);
 
+  /**
+   * Fetches the list of available pets from the server and updates the state.
+   * Optionally selects a pet by name if provided.
+   *
+   * @param {string} [nameOfPetToSelect] - Name of the pet to be automatically selected, if it exists.
+   */
   const getPets = (nameOfPetToSelect?: string) => {
     petProvider
       .getPets()
@@ -83,6 +105,11 @@ const BoardingForm: React.FC<IBoardingFormProps> = ({ show, onClose }) => {
       .catch((error) => console.error(error));
   };
 
+  /**
+   * Submits the form data to create a new boarding entry.
+   *
+   * @param {IForm} formData - The form data.
+   */
   const onRegister: SubmitHandler<IForm> = (formData: IForm) => {
     const createInput: BoardingCreateInput = {
       petId: formData.petId,

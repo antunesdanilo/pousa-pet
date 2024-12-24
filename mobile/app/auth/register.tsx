@@ -17,19 +17,40 @@ interface IForm {
 
 const userProvider: IUserProvider = new UserProvider();
 
+/**
+ * Register Component.
+ *
+ * This component provides a user registration form. It allows users to enter their name, validates the input,
+ * and submits the data to create a new user. On successful registration, it redirects to the login screen.
+ *
+ * @component
+ *
+ * @example
+ * // Example usage
+ * <Register />
+ */
 const Register = () => {
+  // Redux dispatcher
   const dispatch = useAppDispatch();
 
+  // Router hook for navigation
   const router = useRouter();
 
+  // Form initial state
   const formInitialState: IForm = {
     name: '',
   };
 
+  // React Hook Form setup
   const form = useForm<IForm>({
     values: formInitialState,
   });
 
+  /**
+   * Handles the registration process.
+   *
+   * @param {IForm} form - The form data containing the user's name.
+   */
   const onRegister: SubmitHandler<IForm> = (form: IForm) => {
     const createInput: UserCreateInput = {
       name: form.name,

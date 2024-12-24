@@ -12,6 +12,17 @@ import { PageTitle } from '@/components/pagetitle';
 
 const petProvider: IPetProvider = new PetProvider();
 
+/**
+ * Pets Component
+ *
+ * Displays a list of registered pets and allows the user to add a new pet using a floating action button (FAB).
+ * Includes pull-to-refresh functionality and integrates with a PetForm modal for adding new pets.
+ *
+ * @component
+ *
+ * @example
+ * <Pets />
+ */
 const Pets: React.FC = () => {
   const isFocused = useIsFocused();
 
@@ -27,6 +38,10 @@ const Pets: React.FC = () => {
     }
   }, [isFocused]);
 
+  /**
+   * Fetches the list of pets from the server and updates the state.
+   * Displays any errors in the console.
+   */
   const getPets = () => {
     petProvider
       .getPets()
@@ -46,26 +61,28 @@ const Pets: React.FC = () => {
         <Empty message="Nenhum pet foi cadastrado ainda." />
       ) : null}
 
-      <FlatList
-        data={pets}
-        keyExtractor={(item) => item.petId}
-        ListHeaderComponent={<PageTitle title="Pets" />}
-        renderItem={({ item }) => (
-          <Card style={styles.listCard}>
-            <Card.Content>
-              <Text>Nome: {item.name}</Text>
-              <Text>Tutor: {item.tutor?.name}</Text>
-              <Text>Telefone do Tutor: {item.tutor?.phoneNumber}</Text>
-              <Text>Espécie: {item.species?.name}</Text>
-              <Text>Raça: {item.breed?.name}</Text>
-            </Card.Content>
-          </Card>
-        )}
-        refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={getPets} />
-        }
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
-      />
+      {pets.length ? (
+        <FlatList
+          data={pets}
+          keyExtractor={(item) => item.petId}
+          ListHeaderComponent={<PageTitle title="Pets" />}
+          renderItem={({ item }) => (
+            <Card style={styles.listCard}>
+              <Card.Content>
+                <Text>Nome: {item.name}</Text>
+                <Text>Tutor: {item.tutor?.name}</Text>
+                <Text>Telefone do Tutor: {item.tutor?.phoneNumber}</Text>
+                <Text>Espécie: {item.species?.name}</Text>
+                <Text>Raça: {item.breed?.name}</Text>
+              </Card.Content>
+            </Card>
+          )}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={getPets} />
+          }
+          contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
+        />
+      ) : null}
 
       <PetForm
         show={showForm}

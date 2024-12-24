@@ -20,6 +20,17 @@ import { PageTitle } from '@/components/pagetitle';
 
 const boardingProvider: IBoardingProvider = new BoardingProvider();
 
+/**
+ * Home Component
+ *
+ * Displays a list of pet boarding records with options to add a new record, view detailed information, or refresh the list.
+ *
+ * @component
+ *
+ * @example
+ * // Example usage
+ * <Home />
+ */
 const Home: React.FC = () => {
   const isFocused = useIsFocused();
 
@@ -41,6 +52,11 @@ const Home: React.FC = () => {
     }
   }, [isFocused]);
 
+  /**
+   * Fetches the list of boarding records from the server.
+   * Updates the state with sorted records by check-in date.
+   * Displays a toast message if the operation fails.
+   */
   const getBoardings = () => {
     boardingProvider
       .getBoardings()
@@ -67,35 +83,38 @@ const Home: React.FC = () => {
         <Empty message="Nenhuma hospedagem foi cadastrada ainda." />
       ) : null}
 
-      <FlatList
-        data={boardings}
-        keyExtractor={(item) => item.boardingId}
-        ListHeaderComponent={<PageTitle title="Hospedagens" />}
-        renderItem={({ item }) => (
-          <Card style={styles.listCard}>
-            <Card.Content>
-              <Text>Pet: {item.pet.name}</Text>
-              <Text>
-                Data de entrada: {moment(item.checkInDate).format('DD/MM/yyyy')}
-              </Text>
-            </Card.Content>
-            <Card.Actions>
-              <Button
-                onPress={() => {
-                  setShowBoardingDetails(true);
-                  setBoardingToDetails(item);
-                }}
-              >
-                Mais detalhes
-              </Button>
-            </Card.Actions>
-          </Card>
-        )}
-        refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={getBoardings} />
-        }
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
-      />
+      {boardings.length ? (
+        <FlatList
+          data={boardings}
+          keyExtractor={(item) => item.boardingId}
+          ListHeaderComponent={<PageTitle title="Hospedagens" />}
+          renderItem={({ item }) => (
+            <Card style={styles.listCard}>
+              <Card.Content>
+                <Text>Pet: {item.pet.name}</Text>
+                <Text>
+                  Data de entrada:{' '}
+                  {moment(item.checkInDate).format('DD/MM/yyyy')}
+                </Text>
+              </Card.Content>
+              <Card.Actions>
+                <Button
+                  onPress={() => {
+                    setShowBoardingDetails(true);
+                    setBoardingToDetails(item);
+                  }}
+                >
+                  Mais detalhes
+                </Button>
+              </Card.Actions>
+            </Card>
+          )}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={getBoardings} />
+          }
+          contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
+        />
+      ) : null}
 
       <BoardingForm
         show={showForm}

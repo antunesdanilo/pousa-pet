@@ -11,7 +11,7 @@ export class TestMockSpeciesRepository
   private species: SpeciesDto[] = [];
 
   injectData(data: SpeciesDto[]): void {
-    this.species = [...this.species, ...data];
+    this.species = data;
   }
 
   findMany = jest.fn().mockImplementation((): Promise<SpeciesDto[]> => {

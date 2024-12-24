@@ -14,6 +14,13 @@ import Foundation from '@expo/vector-icons/Foundation';
 import { Text, View } from 'react-native';
 import { Image } from 'expo-image';
 
+/**
+ * Layout component for the main app screen with navigation tabs.
+ * The layout contains a header with a logo, user name, and a logout button.
+ * The component handles tab navigation and allows the user to log out.
+ *
+ * @returns {JSX.Element} The rendered layout component with tab navigation.
+ */
 const Layout: React.FC = () => {
   const router = useRouter();
 
@@ -21,6 +28,10 @@ const Layout: React.FC = () => {
 
   const { user } = useAppSelector<UserSliceState>(selectUser);
 
+  /**
+   * Handles user logout by dispatching the logout action
+   * and redirecting to the login page.
+   */
   const handleLogout = () => {
     dispatch(logout());
     router.push('/auth/login');
