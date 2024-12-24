@@ -63,23 +63,25 @@ const Breeds: React.FC = () => {
         <Empty message=" Nenhuma raça foi cadastrada ainda." />
       ) : null}
 
-      <FlatList
-        data={breeds}
-        keyExtractor={(item) => item.breedId}
-        ListHeaderComponent={<PageTitle title="Raças" />}
-        renderItem={({ item }) => (
-          <Card style={styles.listCard}>
-            <Card.Content>
-              <Text>Espécie: {item.species.name}</Text>
-              <Text>Raça: {item.name}</Text>
-            </Card.Content>
-          </Card>
-        )}
-        refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={getBreeds} />
-        }
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
-      />
+      {breeds.length ? (
+        <FlatList
+          data={breeds}
+          keyExtractor={(item) => item.breedId}
+          ListHeaderComponent={<PageTitle title="Raças" />}
+          renderItem={({ item }) => (
+            <Card style={styles.listCard}>
+              <Card.Content>
+                <Text>Espécie: {item.species.name}</Text>
+                <Text>Raça: {item.name}</Text>
+              </Card.Content>
+            </Card>
+          )}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={getBreeds} />
+          }
+          contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
+        />
+      ) : null}
 
       <BreedForm
         show={showForm}

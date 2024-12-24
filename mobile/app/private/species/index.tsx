@@ -64,22 +64,24 @@ const Species: React.FC = () => {
         <Empty message=" Nenhuma espécie foi cadastrada ainda." />
       ) : null}
 
-      <FlatList
-        data={species}
-        keyExtractor={(item) => item.speciesId}
-        ListHeaderComponent={<PageTitle title="Espécies" />}
-        renderItem={({ item }) => (
-          <Card style={styles.listCard}>
-            <Card.Content>
-              <Text>Nome: {item.name}</Text>
-            </Card.Content>
-          </Card>
-        )}
-        refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={getSpecies} />
-        }
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
-      />
+      {species.length ? (
+        <FlatList
+          data={species}
+          keyExtractor={(item) => item.speciesId}
+          ListHeaderComponent={<PageTitle title="Espécies" />}
+          renderItem={({ item }) => (
+            <Card style={styles.listCard}>
+              <Card.Content>
+                <Text>Nome: {item.name}</Text>
+              </Card.Content>
+            </Card>
+          )}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={getSpecies} />
+          }
+          contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
+        />
+      ) : null}
 
       <SpeciesForm
         show={showForm}

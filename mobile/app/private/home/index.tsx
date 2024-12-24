@@ -83,35 +83,38 @@ const Home: React.FC = () => {
         <Empty message="Nenhuma hospedagem foi cadastrada ainda." />
       ) : null}
 
-      <FlatList
-        data={boardings}
-        keyExtractor={(item) => item.boardingId}
-        ListHeaderComponent={<PageTitle title="Hospedagens" />}
-        renderItem={({ item }) => (
-          <Card style={styles.listCard}>
-            <Card.Content>
-              <Text>Pet: {item.pet.name}</Text>
-              <Text>
-                Data de entrada: {moment(item.checkInDate).format('DD/MM/yyyy')}
-              </Text>
-            </Card.Content>
-            <Card.Actions>
-              <Button
-                onPress={() => {
-                  setShowBoardingDetails(true);
-                  setBoardingToDetails(item);
-                }}
-              >
-                Mais detalhes
-              </Button>
-            </Card.Actions>
-          </Card>
-        )}
-        refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={getBoardings} />
-        }
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
-      />
+      {boardings.length ? (
+        <FlatList
+          data={boardings}
+          keyExtractor={(item) => item.boardingId}
+          ListHeaderComponent={<PageTitle title="Hospedagens" />}
+          renderItem={({ item }) => (
+            <Card style={styles.listCard}>
+              <Card.Content>
+                <Text>Pet: {item.pet.name}</Text>
+                <Text>
+                  Data de entrada:{' '}
+                  {moment(item.checkInDate).format('DD/MM/yyyy')}
+                </Text>
+              </Card.Content>
+              <Card.Actions>
+                <Button
+                  onPress={() => {
+                    setShowBoardingDetails(true);
+                    setBoardingToDetails(item);
+                  }}
+                >
+                  Mais detalhes
+                </Button>
+              </Card.Actions>
+            </Card>
+          )}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={getBoardings} />
+          }
+          contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
+        />
+      ) : null}
 
       <BoardingForm
         show={showForm}

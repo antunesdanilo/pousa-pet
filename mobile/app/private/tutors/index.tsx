@@ -65,23 +65,25 @@ const Tutors: React.FC = () => {
         <Empty message="Nenhum tutor foi cadastrado ainda." />
       ) : null}
 
-      <FlatList
-        data={tutors}
-        keyExtractor={(item) => item.tutorId}
-        ListHeaderComponent={<PageTitle title="Tutores" />}
-        renderItem={({ item }) => (
-          <Card style={styles.listCard}>
-            <Card.Content>
-              <Text>Nome: {item.name}</Text>
-              <Text>Telefone: {applyPhoneMask(item.phoneNumber)}</Text>
-            </Card.Content>
-          </Card>
-        )}
-        refreshControl={
-          <RefreshControl refreshing={isLoading} onRefresh={getTutors} />
-        }
-        contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
-      />
+      {tutors.length ? (
+        <FlatList
+          data={tutors}
+          keyExtractor={(item) => item.tutorId}
+          ListHeaderComponent={<PageTitle title="Tutores" />}
+          renderItem={({ item }) => (
+            <Card style={styles.listCard}>
+              <Card.Content>
+                <Text>Nome: {item.name}</Text>
+                <Text>Telefone: {applyPhoneMask(item.phoneNumber)}</Text>
+              </Card.Content>
+            </Card>
+          )}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={getTutors} />
+          }
+          contentContainerStyle={{ paddingHorizontal: 20, paddingBottom: 15 }}
+        />
+      ) : null}
 
       <TutorForm
         show={showForm}
