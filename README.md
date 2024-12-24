@@ -21,6 +21,25 @@ Com o **PousaPet**, os estabelecimentos podem gerenciar suas operações de mane
 - Interface Amigável:
   Design intuitivo e responsivo para dispositivos móveis.
 
+**Capturas de Tela**
+
+<div style='display: flex; flex-wrap: wrap; gap: 30px'>
+  <img src="./mobile/assets/screenshots/1.%20Splash.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/2. Login.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/3. Cadastro.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/4. Home e Lista de Hospedagens.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/5. Detalhes da Hospedagem.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/6. Formulário para Adição de Hospedagem.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/7. Lista de Pets.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/8. Formulário para Adição de Pet.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/9. Lista de Tutores.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/10. Formulário para Adição de Tutor.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/11. Lista de Espécies.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/12. Formulário para Adição de Espécie.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/13. Lista de Raças.png" alt="Print da Tela" width="200">
+  <img src="./mobile/assets/screenshots/14. Formulário para Adição de Raças.png" alt="Print da Tela" width="200">
+</div>
+
 ---
 
 ## **Índice**
