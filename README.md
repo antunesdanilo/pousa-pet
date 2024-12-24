@@ -1,11 +1,25 @@
-# **VaiDeCarro** 🚗
+# **PousaPet** 🐾
 
-**VaiDeCarro** é uma aplicação full-stack para estimar e solicitar corridas com motoristas parceiros. O sistema é composto por:
+**PousaPet** é uma aplicação mobile voltada para a gestão de hospedagem em hotéis para pets. O objetivo é facilitar o controle de informações sobre os animais hospedados, como dados dos tutores, datas de entrada e saída, espécies, raças e o cálculo automático de diárias.
 
-- **Frontend**: Uma aplicação React para interação com o usuário.
-- **Backend**: Uma API construída com NestJS, responsável por gerenciar dados de motoristas, clientes e corridas.
+Com o **PousaPet**, os estabelecimentos podem gerenciar suas operações de maneira eficiente e profissional, garantindo praticidade para os administradores e segurança para os tutores.
 
-A arquitetura usa **Docker Compose** para facilitar a execução de ambas as partes do sistema.
+🚀 **Funcionalidades**
+
+- Gerenciamento de Animais Hospedados:
+  Inclua e visualize registros de animais hospedados.
+
+- Informações do Tutor:
+  Cadastro e exibição de dados como nome e contato do tutor.
+
+- Detalhes do Pet:
+  Informações como espécie (cachorro/gato), raça e datas de hospedagem.
+
+- Cálculo Automático de Diárias:
+  Controle automático das diárias acumuladas e previsão de término da estadia.
+
+- Interface Amigável:
+  Design intuitivo e responsivo para dispositivos móveis.
 
 ---
 
@@ -13,26 +27,27 @@ A arquitetura usa **Docker Compose** para facilitar a execução de ambas as par
 
 1. [Descrição do Projeto](#descrição-do-projeto)
 2. [Boas Práticas Adotadas](#boas-práticas-adotadas)
-3. [Funcionalidades Principais](#funcionalidades-principais)
-4. [Tecnologias Utilizadas](#tecnologias-utilizadas)
-5. [Download e Instalação](#download-e-instalação)
-6. [Execução com Docker Compose](#execução-com-docker-compose)
-7. [Execução com Servidores de Desenvolvimento](#execução-com-servidores-de-desenvolvimento)
+3. [Tecnologias Utilizadas](#tecnologias-utilizadas)
+4. [Download e Instalação](#download-e-instalação)
+5. [Execução do Backend com Docker](#execução-do-backend-com-docker)
+6. [Execução do Backend com Servidor de Desenvolvimento](#execução-do-backend-com-servidor-de-desenvolvimento)
+7. [Instalação do Aplicativo Mobile](#instalação-do-aplicativo-mobile)
 8. [Acesso](#acesso)
 9. [Testes](#testes)
-10. [Estrutura do Repositório](#estrutura-do-repositório)
-11. [Melhorias Futuras](#melhorias-futuras)
+10. [Melhorias Futuras](#melhorias-futuras)
 
 ---
 
 ## **Descrição do Projeto**
 
-O VaiDeCarro é uma solução para conectar usuários e motoristas para corridas sob demanda. O sistema atualmente suporta:
+O PousaPet é uma solução para atender às necessidades de hotéis de pets que desejam simplificar seus processos operacionais e oferecer uma experiência de alta qualidade para os tutores. A aplicação atualmente suporta:
 
-1. Escolha de origem e destino via integração com o **Google Maps**.
-2. Estimativa de preço com base no motorista e na rota.
-3. Visualização de motoristas disponíveis.
-4. Confirmação e gerenciamento de corridas.
+1. Cadastro de hospedagens.
+2. Cadastro de pets.
+3. Cadastro de tutores.
+4. Cadastro de espécies.
+5. Cadastro de raças.
+6. Login simbólico através da criação de um usuário sem autenticação com senha
 
 O backend utiliza **NestJS** e **Prisma ORM** para manipulação de dados, e expõe APIs RESTful documentadas com **Swagger**.
 
@@ -40,44 +55,15 @@ O backend utiliza **NestJS** e **Prisma ORM** para manipulação de dados, e exp
 
 ## **Boas Práticas Adotadas**
 
-O desenvolvimento do VaiDeCarro seguiu práticas recomendadas da engenharia de software, com foco em qualidade, manutenibilidade e documentação:
+O desenvolvimento do PousaPet seguiu práticas recomendadas da engenharia de software, com foco em qualidade, manutenibilidade e documentação:
 
 - Padrões de Arquitetura: Backend organizado com princípios da Arquitetura Limpa e frontend estruturado com componentes reutilizáveis.
 - Manutenibilidade: Código modular e testável, permitindo fácil evolução do sistema.
 - Documentação:
   - Swagger: APIs documentadas de forma acessível e visual no backend.
-  - Storybook: Documentação interativa dos componentes React, facilitando o entendimento e a reutilização no frontend.
 - Qualidade do Código: Uso de ferramentas como ESLint e Prettier para garantir consistência e legibilidade.
 - Testes Automatizados: Testes unitários e de integração cobrindo casos de uso essenciais no backend e frontend.
-- Design Responsivo: Interface ajustável para diferentes dispositivos, utilizando práticas modernas de CSS.
-
-## **Funcionalidades Principais**
-
-### **Frontend**
-
-- **Busca de locais e rotas:** Consome a API de predições do Google Maps via backend.
-- **Seleção de motoristas:** Mostra informações como nome, veículo, avaliação e preço.
-- **Histórico de viagens:** Exibe corridas realizadas com opções de filtro.
-
-### **Backend**
-
-- **Ride Controller:**
-
-  - Estimar preço de uma corrida e listar motoristas disponíveis.
-  - Confirmar uma corrida com motorista.
-  - Listar corridas realizadas.
-
-- **MapsApi Controller:**
-
-  - Gateway para a API de predições do Google Maps.
-
-- **Customer Controller:**
-
-  - Cadastro de novos clientes.
-  - Listagem e detalhes de clientes.
-
-- **Driver Controller:**
-  - Listagem de todos os motoristas cadastrados.
+- Design Adaptativo para Mobile: Interfaces projetadas para diferentes tamanhos e resoluções de telas em dispositivos móveis.
 
 ---
 
@@ -85,18 +71,16 @@ O desenvolvimento do VaiDeCarro seguiu práticas recomendadas da engenharia de s
 
 ### **Frontend**
 
-- React, Redux Toolkit, React Router DOM
-- Google Maps API
-- Bootstrap
-- StoryBook para documentação dos componentes
+- React Native, Redux Toolkit,
+- Expo, Expo Go
+- React Native Paper
 
 ### **Backend**
 
 - NestJS
 - Prisma ORM
-- Google Maps API
 - Swagger para documentação da API
-- Docker e Docker Compose
+- Docker
 
 ### **Geral**
 
@@ -113,9 +97,9 @@ O desenvolvimento do VaiDeCarro seguiu práticas recomendadas da engenharia de s
 ### **Clone o repositório:**
 
 ```bash
-$ git clone https://github.com/antunesdanilo/vai-de-carro.git
+$ git clone https://github.com/antunesdanilo/pousa-pet.git
 
-$ cd vai-de-carro
+$ cd pousa-pet
 ```
 
 ### **Instale as dependências do backend**
@@ -148,20 +132,25 @@ ou
 $ npm run migrate:deploy
 ```
 
-## Execução Com Docker Compose
+## Execução do Backend Com Docker
 
 ### **Pré-requisitos**
 
 - Docker
-- Docker Compose
 
-### **Execute o Docker Compose:**
+### **Faça o Build do Dockerfile para a Criação da Imagem:**
 
 ```bash
-$ docker-compose up --build
+$ docker build -t pousapet-backend .
 ```
 
-## Execução com Servidores de Desenvolvimento
+### **Execute a Criação do Container:**
+
+```bash
+$ docker run -d -p 3000:3000 --name meu-container pousapet-backend
+```
+
+## Execução do Backend com Servidor de Desenvolvimento
 
 ### **Pré-requisitos**
 
@@ -178,52 +167,36 @@ $ yarn start
 $ npm start
 ```
 
-### **Execute o frontend**
+## Instalação do Aplicativo Mobile
+
+### **Pré-requisitos**
+
+- Conta no Expo Go
+- Aplicativo Expo Go instalado no smartphone ou em um dispositivo virtual Android
+
+### **Faça login na sua conta Expo Go no terminal:**
 
 ```bash
-$ cd frontend
+$ cd mobile
 
-$ yarn dev
-# ou
-$ npm run dev
+$ npx expo login
 ```
 
-### **Execute o storybook**
+### **Inicie o servidor de desenvolvimento**
 
 ```bash
-$ cd frontend
+$ cd mobile
 
-$ yarn storybook
-# ou
-$ npm run storybook
+$ npm start
 ```
 
 ## **Acesso**
 
 Após a execução com servidores de desenvolvimento ou com Docker Compose, a aplicação estará disponível em:
 
-- Frontend: http://localhost
-- Backend: http://localhost:8080
-- Swagger UI: http://localhost:8080/swagger (Documentação completa da API)
-- Story Book: http://localhost:6006
-
-## **Estrutura do Repositório**
-
-```plaintext
-vaidecarro/
-├── backend/         # API construída com NestJS
-│   ├── src/         # Código-fonte
-│   ├── test/        # Testes automatizados
-│   ├── Dockerfile   # Dockerfile do backend
-│   ├── package.json # Configuração de dependências e scripts do backend
-├── frontend/        # Aplicação React
-│   ├── src/         # Código-fonte
-│   ├── tests/       # Testes automatizados
-│   ├── Dockerfile   # Dockerfile do frontend
-│   ├── package.json # Configuração de dependências e scripts do frontend
-├── docker-compose.yml # Configuração do Docker Compose
-└── README.md         # Documentação principal
-```
+- Mobile: Abra o aplicativo Expo Go no smartphone ou dispositivo virtual Android, escaneie o QR code disponível no terminal, ou digite a URL do servidor de desenvolvimento.
+- Backend: http://localhost:3000
+- Swagger UI: http://localhost:3000/swagger (Documentação completa da API)
 
 ## **Testes**
 
@@ -252,11 +225,13 @@ $ yarn test
 $ npm run test
 ```
 
+---
+
 ## **Melhorias Futuras**
 
 - Autenticação JWT: Proteger rotas do backend.
 - Pagamentos: Integração com gateways de pagamento para simular cobrança.
-- Deploy: Configurar deploy em serviços como Vercel (frontend) e Render (backend).
+- Permitir a edição e remoção de registros
 - Testes E2E: Implementar testes de ponta a ponta para validar fluxos completos.
 - Performance: Melhorar a eficiência das consultas no backend.
 

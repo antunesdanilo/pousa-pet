@@ -47,6 +47,18 @@ const tutorProvider: ITutorProvider = new TutorProvider();
 const speciesProvider: ISpeciesProvider = new SpeciesProvider();
 const breedProvider: IBreedProvider = new BreedProvider();
 
+/**
+ * PetForm Component
+ *
+ * A form modal for creating a new pet, including fields for the pet's name, species, breed, and tutor.
+ * It includes dynamic dropdowns for species and breed, and options to add new tutors, species, or breeds directly from the form.
+ * The form uses `react-hook-form` for handling form state and validation.
+ *
+ * @component
+ *
+ * @example
+ * <PetForm show={true} onClose={handleClose} />
+ */
 const PetForm: React.FC<IPetFormProps> = ({ show, onClose }) => {
   const [tutors, setTutors] = useState<TutorDto[]>([]);
   const [species, setSpecies] = useState<SpeciesDto[]>([]);
@@ -68,6 +80,7 @@ const PetForm: React.FC<IPetFormProps> = ({ show, onClose }) => {
     shouldFocusError: false,
   });
 
+  // Filters the breeds based on the selected species.
   const breedsFiltered = useMemo(() => {
     if (form.getValues('speciesId') && breeds.length) {
       const bF = breeds.filter(
@@ -86,6 +99,11 @@ const PetForm: React.FC<IPetFormProps> = ({ show, onClose }) => {
     }
   }, [show]);
 
+  /**
+   * Fetches the list of tutors.
+   * Optionally selects a specific tutor if provided.
+   * @param {string} nameOfTutorToSelect - Name of the tutor to pre-select.
+   */
   const getTutors = (nameOfTutorToSelect?: string) => {
     tutorProvider
       .getTutors()
@@ -104,6 +122,11 @@ const PetForm: React.FC<IPetFormProps> = ({ show, onClose }) => {
       });
   };
 
+  /**
+   * Fetches the list of species.
+   * Optionally selects a specific species if provided.
+   * @param {string} nameOfSpeciesToSelect - Name of the species to pre-select.
+   */
   const getSpecies = (nameOfSpeciesToSelect?: string) => {
     speciesProvider
       .getSpecies()
@@ -122,6 +145,11 @@ const PetForm: React.FC<IPetFormProps> = ({ show, onClose }) => {
       });
   };
 
+  /**
+   * Fetches the list of breeds.
+   * Optionally selects a specific breed if provided.
+   * @param {string} nameOfBreedToSelect - Name of the breed to pre-select.
+   */
   const getBreeds = (nameOfBreedToSelect?: string) => {
     breedProvider
       .getBreeds()
@@ -140,6 +168,10 @@ const PetForm: React.FC<IPetFormProps> = ({ show, onClose }) => {
       });
   };
 
+  /**
+   * Handles form submission and creates a new pet.
+   * @param {IForm} formData - The form data.
+   */
   const onRegister: SubmitHandler<IForm> = (formData: IForm) => {
     const createInput: PetCreateInput = {
       tutorId: formData.tutorId,
@@ -165,6 +197,9 @@ const PetForm: React.FC<IPetFormProps> = ({ show, onClose }) => {
       });
   };
 
+  /**
+   * Cancels the form and closes the modal.
+   */
   const handleCancel = () => {
     onClose();
     form.reset();

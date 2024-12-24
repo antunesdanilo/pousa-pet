@@ -12,6 +12,17 @@ import { PageTitle } from '@/components/pagetitle';
 
 const petProvider: IPetProvider = new PetProvider();
 
+/**
+ * Pets Component
+ *
+ * Displays a list of registered pets and allows the user to add a new pet using a floating action button (FAB).
+ * Includes pull-to-refresh functionality and integrates with a PetForm modal for adding new pets.
+ *
+ * @component
+ *
+ * @example
+ * <Pets />
+ */
 const Pets: React.FC = () => {
   const isFocused = useIsFocused();
 
@@ -27,6 +38,10 @@ const Pets: React.FC = () => {
     }
   }, [isFocused]);
 
+  /**
+   * Fetches the list of pets from the server and updates the state.
+   * Displays any errors in the console.
+   */
   const getPets = () => {
     petProvider
       .getPets()

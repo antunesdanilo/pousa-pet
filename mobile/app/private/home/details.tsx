@@ -10,6 +10,27 @@ interface IBoardingDetailsProps {
   onClose: () => void;
 }
 
+/**
+ * BoardingDetails Component
+ *
+ * Displays detailed information about a pet's boarding stay.
+ * The details include pet's name, owner's information, species, breed, check-in date, expected and used daily stays.
+ *
+ * @component
+ *
+ * @param {IBoardingDetailsProps} props - The props for the BoardingDetails component.
+ * @param {BoardingDto} props.boarding - The boarding data object containing all details about the pet's stay.
+ * @param {boolean} props.show - Determines whether the modal is visible.
+ * @param {Function} props.onClose - Callback to close the modal.
+ *
+ * @example
+ * // Example usage
+ * <BoardingDetails
+ *   boarding={boardingData}
+ *   show={true}
+ *   onClose={() => setShowModal(false)}
+ * />
+ */
 const BoardingDetails: React.FC<IBoardingDetailsProps> = ({
   boarding,
   show,

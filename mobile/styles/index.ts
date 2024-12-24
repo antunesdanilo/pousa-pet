@@ -3,10 +3,12 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#FAFAFA',
   },
   containerPadding: {
     flex: 1,
     paddingHorizontal: 20,
+    backgroundColor: '#FAFAFA',
   },
   heading1: {
     width: '100%',
@@ -58,7 +60,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
   },
   modalContent: {
-    backgroundColor: '#F2F2F2',
+    backgroundColor: '#FAFAFA',
     width: '100%',
     flex: 1,
     padding: 20,
@@ -67,12 +69,12 @@ const styles = StyleSheet.create({
   modalContentAuto: {
     width: '90%',
     borderRadius: 6,
-    backgroundColor: '#F2F2F2',
+    backgroundColor: '#FAFAFA',
     padding: 15,
     alignItems: 'center',
   },
   modalContentScrollView: {
-    backgroundColor: '#F2F2F2',
+    backgroundColor: '#FAFAFA',
     width: '100%',
     flex: 1,
     padding: 20,

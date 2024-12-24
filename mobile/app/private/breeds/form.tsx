@@ -35,22 +35,50 @@ interface IForm {
 const breedProvider: IBreedProvider = new BreedProvider();
 const speciesProvider: ISpeciesProvider = new SpeciesProvider();
 
+/**
+ * Component for creating a new breed.
+ *
+ * This component displays a modal allowing the user to select a species and provide the breed name to be created.
+ *
+ * @typedef {Object} IBreedFormProps
+ * @property {boolean} show - Indicates whether the modal should be displayed.
+ * @property {function(string=): void} onClose - Function called when the modal is closed, optionally receiving the name of the last inserted breed.
+ * @property {string} [speciesId] - Predefined species ID, if applicable.
+ *
+ * @typedef {Object} IForm
+ * @property {string} speciesId - ID of the selected species.
+ * @property {string} name - Name of the breed to be created.
+ *
+ * @component
+ * @param {IBreedFormProps} props - Properties of the component.
+ *
+ * @example
+ * // Example usage
+ * <BreedForm
+ *   show={true}
+ *   onClose={(lastInsertedName) => console.log(lastInsertedName)}
+ *   speciesId="123"
+ * />
+ */
 const BreedForm: React.FC<IBreedFormProps> = ({ show, onClose, speciesId }) => {
+  // Dependency imports and state initialization.
   const isFocused = useIsFocused();
-
   const [species, setSpecies] = useState<SpeciesDto[]>([]);
   const [showSpeciesForm, setShowSpeciesForm] = useState<boolean>(false);
 
+  // Initial form state.
   const formInitialState: IForm = {
     speciesId: '',
     name: '',
   };
-
   const form = useForm<IForm>({
     values: formInitialState,
     shouldFocusError: false,
   });
 
+  /**
+   * Updates the initial form value if `speciesId` is provided.
+   */
   useEffect(() => {
     if (speciesId) {
       form.setValue('speciesId', speciesId);
@@ -58,12 +86,20 @@ const BreedForm: React.FC<IBreedFormProps> = ({ show, onClose, speciesId }) => {
     }
   }, [speciesId]);
 
+  /**
+   * Fetches available species when the component is in focus.
+   */
   useEffect(() => {
     if (isFocused) {
       getSpecies();
     }
   }, [isFocused]);
 
+  /**
+   * Retrieves the list of species and updates the local state.
+   *
+   * @param {string} [nameOfSpecieToSelect] - Name of the species to be automatically selected, if applicable.
+   */
   const getSpecies = (nameOfSpecieToSelect?: string) => {
     speciesProvider
       .getSpecies()
@@ -82,6 +118,12 @@ const BreedForm: React.FC<IBreedFormProps> = ({ show, onClose, speciesId }) => {
       });
   };
 
+  /**
+   * Function called when the form is submitted.
+   * Creates a new breed based on the form data.
+   *
+   * @param {IForm} formData - Data entered in the form.
+   */
   const onRegister: SubmitHandler<IForm> = (formData: IForm) => {
     const createInput: BreedCreateInput = {
       speciesId: formData.speciesId,
@@ -105,6 +147,10 @@ const BreedForm: React.FC<IBreedFormProps> = ({ show, onClose, speciesId }) => {
       });
   };
 
+  /**
+   * Function called when the form is canceled.
+   * Resets the form state and closes the modal.
+   */
   const handleCancel = () => {
     onClose();
     form.reset();

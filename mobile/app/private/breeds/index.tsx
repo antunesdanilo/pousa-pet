@@ -12,7 +12,20 @@ import { PageTitle } from '@/components/pagetitle';
 
 const breedProvider: IBreedProvider = new BreedProvider();
 
+/**
+ * Breeds Component.
+ *
+ * This component displays a list of breeds and allows the user to create new ones using a form.
+ * It fetches data from the server and includes a floating action button (FAB) to trigger the creation modal.
+ *
+ * @component
+ *
+ * @example
+ * // Example usage
+ * <Breeds />
+ */
 const Breeds: React.FC = () => {
+  // Hooks and state management
   const isFocused = useIsFocused();
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -27,6 +40,10 @@ const Breeds: React.FC = () => {
     }
   }, [isFocused]);
 
+  /**
+   * Fetches the list of breeds from the server.
+   * Updates the local state with the retrieved data.
+   */
   const getBreeds = () => {
     breedProvider
       .getBreeds()

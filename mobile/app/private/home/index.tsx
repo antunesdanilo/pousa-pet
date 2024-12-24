@@ -20,6 +20,17 @@ import { PageTitle } from '@/components/pagetitle';
 
 const boardingProvider: IBoardingProvider = new BoardingProvider();
 
+/**
+ * Home Component
+ *
+ * Displays a list of pet boarding records with options to add a new record, view detailed information, or refresh the list.
+ *
+ * @component
+ *
+ * @example
+ * // Example usage
+ * <Home />
+ */
 const Home: React.FC = () => {
   const isFocused = useIsFocused();
 
@@ -41,6 +52,11 @@ const Home: React.FC = () => {
     }
   }, [isFocused]);
 
+  /**
+   * Fetches the list of boarding records from the server.
+   * Updates the state with sorted records by check-in date.
+   * Displays a toast message if the operation fails.
+   */
   const getBoardings = () => {
     boardingProvider
       .getBoardings()

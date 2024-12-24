@@ -22,6 +22,17 @@ interface IForm {
 
 const tutorProvider: ITutorProvider = new TutorProvider();
 
+/**
+ * Form component for registering a new tutor.
+ * This form allows the user to input the tutor's name and phone number,
+ * and then save it using the provided tutor provider.
+ *
+ * @param {ITutorFormProps} props - Properties passed to the form component.
+ * @param {boolean} props.show - Flag to show or hide the form modal.
+ * @param {function} props.onClose - Callback function to close the form and pass the last inserted name.
+ *
+ * @returns {JSX.Element} The rendered form component.
+ */
 const TutorForm: React.FC<ITutorFormProps> = ({ show, onClose }) => {
   const formInitialState: IForm = {
     name: '',
@@ -32,6 +43,13 @@ const TutorForm: React.FC<ITutorFormProps> = ({ show, onClose }) => {
     values: formInitialState,
   });
 
+  /**
+   * Handles the form submission to create a new tutor.
+   * The form data is passed to the tutor provider to create the tutor, and on success,
+   * a success message is shown.
+   *
+   * @param {IForm} formData - The form data containing the tutor's name and phone number.
+   */
   const onRegister: SubmitHandler<IForm> = (formData: IForm) => {
     const createInput: TutorCreateInput = {
       name: formData.name.trim(),
@@ -55,6 +73,9 @@ const TutorForm: React.FC<ITutorFormProps> = ({ show, onClose }) => {
       });
   };
 
+  /**
+   * Cancels the form and closes the modal without saving.
+   */
   const handleCancel = () => {
     onClose();
     form.reset();

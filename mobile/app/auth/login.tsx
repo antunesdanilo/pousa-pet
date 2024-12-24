@@ -19,6 +19,20 @@ import { useIsFocused } from '@react-navigation/native';
 
 const userProvider: IUserProvider = new UserProvider();
 
+/**
+ * @file Login component that allows the user to select an existing user for login or create a new account.
+ *
+ * This component manages user state and user selection, and controls the navigation flow based on the user's choice.
+ *
+ * @component
+ */
+
+/**
+ * The Login component allows the user to select an existing user for login or create a new account.
+ *
+ * @function
+ * @returns {JSX.Element} - The rendered Login component.
+ */
 const Login = () => {
   const isFocused = useIsFocused();
 
@@ -52,6 +66,11 @@ const Login = () => {
       .catch((error) => console.error(error));
   }, [isFocused]);
 
+  /**
+   * Function to handle user login by checking if a user is selected and redirecting to the home page.
+   *
+   * @param {string} [userId] - The ID of the user to be logged in.
+   */
   const handleLogin = (userId?: string) => {
     let user: UserDto | undefined;
     if (userId) {
@@ -105,6 +124,7 @@ const Login = () => {
             selectedValue={userId}
             onValueChange={(item) => setUserId(item)}
           >
+            <Picker.Item label="" value="" key="" />
             {users.map((user) => (
               <Picker.Item
                 label={user.name}
