@@ -11,7 +11,7 @@ export class TestMockBreedRepository
   private breeds: BreedDto[] = [];
 
   injectData(data: BreedDto[]): void {
-    this.breeds = [...this.breeds, ...data];
+    this.breeds = data;
   }
 
   findMany = jest.fn().mockImplementation((): Promise<BreedDto[]> => {

@@ -11,7 +11,7 @@ export class TestMockTutorRepository
   private tutors: TutorDto[] = [];
 
   injectData(data: TutorDto[]): void {
-    this.tutors = [...this.tutors, ...data];
+    this.tutors = data;
   }
 
   findMany = jest.fn().mockImplementation((): Promise<TutorDto[]> => {

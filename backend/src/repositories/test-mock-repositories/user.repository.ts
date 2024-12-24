@@ -11,7 +11,7 @@ export class TestMockUserRepository
   private users: UserDto[] = [];
 
   injectData(data: UserDto[]): void {
-    this.users = [...this.users, ...data];
+    this.users = data;
   }
 
   findMany = jest.fn().mockImplementation((): Promise<UserDto[]> => {

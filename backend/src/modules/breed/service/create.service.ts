@@ -4,11 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 import { BreedRepository } from 'src/repositories/abstract-repositories/breed.repository';
 import { BreedCreateInput } from '../inputs/breed-create.input';
 import { BreedCreateData } from 'src/repositories/create-data/breed-create.data';
+import { SpeciesRepository } from 'src/repositories/abstract-repositories/species.repository';
 
 @Injectable()
 export class CreateBreedService {
   // Injecting the BreedRepository to interact with breed data
-  constructor(private readonly breedRepository: BreedRepository) {}
+  constructor(
+    private readonly breedRepository: BreedRepository,
+    private readonly speciesRepository: SpeciesRepository,
+  ) {}
 
   /**
    * Handles the creation of a new breed.
@@ -24,6 +28,22 @@ export class CreateBreedService {
   async handle(createInput: BreedCreateInput): Promise<CreateStatusDto> {
     // Checking if a breed with the same name already exists
     const breed = await this.breedRepository.findByName(createInput.name);
+
+    // Checking if the speciesId exists
+    const species = await this.speciesRepository.findById(
+      createInput.speciesId,
+    );
+
+    if (!species) {
+      // Throwing an error if species not exists
+      throw new HttpException(
+        {
+          error_code: 'INVALID_DATA',
+          error_description: `A espécie de ID ${createInput.speciesId} não foi encontrada`,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
 
     if (breed && breed.speciesId === createInput.speciesId) {
       // Throwing an error if a breed with the same name and same speciesId exists

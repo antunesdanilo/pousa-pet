@@ -11,7 +11,7 @@ export class TestMockBoardingRepository
   private boardings: BoardingDto[] = [];
 
   injectData(data: BoardingDto[]): void {
-    this.boardings = [...this.boardings, ...data];
+    this.boardings = data;
   }
 
   findMany = jest.fn().mockImplementation((): Promise<BoardingDto[]> => {

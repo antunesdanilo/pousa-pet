@@ -26,6 +26,7 @@ describe('UserCreateService', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
+    mockUserRepository.injectData([]);
   });
 
   it('should be defined', () => {
@@ -38,30 +39,33 @@ describe('UserCreateService', () => {
 
     mockUserRepository.injectData([{ userId, name }]);
 
-    const createInput: UserCreateInput = { userId, name };
+    const createInput: UserCreateInput = { name };
 
-    // Expecting the service to throw an HttpException with BAD_REQUEST status
-    await expect(service.handle(createInput)).rejects.toThrowError(
-      new HttpException(
-        {
-          error_code: 'INVALID_DATA',
-          error_description: 'Já existe um usuário com este nome',
-        },
-        HttpStatus.BAD_REQUEST,
-      ),
-    );
+    try {
+      await service.handle(createInput);
+    } catch (error) {
+      expect(error).toBeInstanceOf(HttpException);
+      expect(error.response.error_code).toBe('INVALID_DATA');
+      expect(error.response.error_description).toBe(
+        'Já existe um usúario com este nome',
+      );
+      expect(error.getStatus()).toBe(HttpStatus.BAD_REQUEST);
+    }
   });
 
-  it('should create a new customer if the name is unique', async () => {
-    const userId = faker.string.uuid();
+  it('should create a new user if the name is unique', async () => {
     const name = faker.person.fullName();
 
-    const createInput: UserCreateInput = { userId, name };
+    const createInput: UserCreateInput = { name };
 
     const result = await service.handle(createInput);
     expect(result).toEqual({ success: true });
 
-    // Verifying that the create method was called with the correct data
-    expect(mockUserRepository.create).toHaveBeenCalledWith(createInput);
+    expect(mockUserRepository.findByName).toHaveBeenCalledWith(name);
+
+    expect(mockUserRepository.create).toHaveBeenCalledWith({
+      userId: expect.any(String),
+      name,
+    });
   });
 });

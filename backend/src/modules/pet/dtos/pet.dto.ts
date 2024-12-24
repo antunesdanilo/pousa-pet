@@ -45,7 +45,7 @@ export class PetDto {
       phoneNumber: '+5511998765432',
     },
   })
-  tutor: TutorDto;
+  tutor?: TutorDto;
 
   @ApiProperty({
     description: 'The species of the pet.',
@@ -55,7 +55,7 @@ export class PetDto {
       name: 'Cachorro',
     },
   })
-  species: SpeciesDto;
+  species?: SpeciesDto;
 
   @ApiProperty({
     description: 'The breed of the pet.',
@@ -66,5 +66,5 @@ export class PetDto {
       name: 'Labrador',
     },
   })
-  breed: BreedDto;
+  breed?: BreedDto;
 }
