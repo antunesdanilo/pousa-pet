@@ -138,6 +138,12 @@ const Layout: React.FC = () => {
           }}
         />
         <Tabs.Screen
+          name="home/details"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
           name="pets/form"
           options={{
             href: null,
