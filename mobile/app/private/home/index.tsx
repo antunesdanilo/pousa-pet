@@ -17,6 +17,7 @@ import { BoardingProvider } from '@/providers/boarding.provider';
 import { IBoardingProvider } from '@/providers/interfaces/boarding.provider';
 import { BoardingDetails } from './details';
 import { PageTitle } from '@/components/pagetitle';
+import { Skeleton } from '@/components/skeleton';
 
 const boardingProvider: IBoardingProvider = new BoardingProvider();
 
@@ -81,6 +82,27 @@ const Home: React.FC = () => {
     <View style={styles.container}>
       {!boardings.length && !isLoading ? (
         <Empty message="Nenhuma hospedagem foi cadastrada ainda." />
+      ) : null}
+
+      {isLoading && !boardings.length ? (
+        <View style={{ paddingHorizontal: 20, paddingTop: 15 }}>
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 110,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 110,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+        </View>
       ) : null}
 
       {boardings.length ? (

@@ -211,7 +211,7 @@ $ npm start
 
 ## **Acesso**
 
-Após a execução com servidores de desenvolvimento ou com Docker Compose, a aplicação estará disponível em:
+Após a execução com servidores de desenvolvimento ou com Docker, a aplicação estará disponível em:
 
 - Mobile: Abra o aplicativo Expo Go no smartphone ou dispositivo virtual Android, escaneie o QR code disponível no terminal, ou digite a URL do servidor de desenvolvimento.
 - Backend: http://localhost:3000
@@ -250,7 +250,7 @@ $ npm run test
 
 - Autenticação JWT: Proteger rotas do backend.
 - Pagamentos: Integração com gateways de pagamento para simular cobrança.
-- Permitir a edição e remoção de registros
+- Permitir a edição e remoção de registros.
 - Testes E2E: Implementar testes de ponta a ponta para validar fluxos completos.
 - Performance: Melhorar a eficiência das consultas no backend.
 

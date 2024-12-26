@@ -10,6 +10,7 @@ import { applyPhoneMask } from '@/utils/apply-phone-mask.util';
 import { Empty } from '@/components/empty';
 import { useIsFocused } from '@react-navigation/native';
 import { PageTitle } from '@/components/pagetitle';
+import { Skeleton } from '@/components/skeleton';
 
 const tutorProvider: ITutorProvider = new TutorProvider();
 
@@ -63,6 +64,27 @@ const Tutors: React.FC = () => {
     <View style={styles.container}>
       {!tutors.length && !isLoading ? (
         <Empty message="Nenhum tutor foi cadastrado ainda." />
+      ) : null}
+
+      {isLoading && !tutors.length ? (
+        <View style={{ paddingHorizontal: 20, paddingTop: 15 }}>
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 70,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 70,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+        </View>
       ) : null}
 
       {tutors.length ? (

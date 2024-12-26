@@ -16,6 +16,7 @@ import { Image } from 'expo-image';
 import { styles } from '@/styles';
 import { Button } from 'react-native-paper';
 import { useIsFocused } from '@react-navigation/native';
+import { Skeleton } from '@/components/skeleton';
 
 const userProvider: IUserProvider = new UserProvider();
 
@@ -40,6 +41,8 @@ const Login = () => {
 
   const router = useRouter();
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const [users, setUsers] = useState<UserDto[]>([]);
   const [userId, setUserId] = useState<string | undefined>(undefined);
   const { user, lastRegisteredName } =
@@ -58,12 +61,17 @@ const Login = () => {
   }, [users, user, lastRegisteredName]);
 
   useEffect(() => {
+    setIsLoading(false);
     userProvider
       .getUsers()
       .then((users: UserDto[]) => {
+        setIsLoading(false);
         setUsers(users);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        setIsLoading(false);
+        console.error(error);
+      });
   }, [isFocused]);
 
   /**
@@ -118,22 +126,32 @@ const Login = () => {
           Selecione um usuário para prosseguir:
         </Text>
 
-        <View style={{ ...styles.nativePicker, marginTop: 10 }}>
-          <Picker
-            key={userId}
-            selectedValue={userId}
-            onValueChange={(item) => setUserId(item)}
-          >
-            <Picker.Item label="" value="" key="" />
-            {users.map((user) => (
-              <Picker.Item
-                label={user.name}
-                value={user.userId}
-                key={user.userId}
-              />
-            ))}
-          </Picker>
-        </View>
+        {isLoading ? (
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 55,
+              marginTop: 20,
+            }}
+          />
+        ) : (
+          <View style={{ ...styles.nativePicker, marginTop: 10 }}>
+            <Picker
+              key={userId}
+              selectedValue={userId}
+              onValueChange={(item) => setUserId(item)}
+            >
+              <Picker.Item label="" value="" key="" />
+              {users.map((user) => (
+                <Picker.Item
+                  label={user.name}
+                  value={user.userId}
+                  key={user.userId}
+                />
+              ))}
+            </Picker>
+          </View>
+        )}
       </View>
 
       <Button

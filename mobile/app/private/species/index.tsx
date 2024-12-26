@@ -9,6 +9,7 @@ import { SpeciesForm } from './form';
 import { Empty } from '@/components/empty';
 import { useIsFocused } from '@react-navigation/native';
 import { PageTitle } from '@/components/pagetitle';
+import { Skeleton } from '@/components/skeleton';
 
 const speciesProvider: ISpeciesProvider = new SpeciesProvider();
 
@@ -62,6 +63,27 @@ const Species: React.FC = () => {
     <View style={styles.container}>
       {!species.length && !isLoading ? (
         <Empty message=" Nenhuma espécie foi cadastrada ainda." />
+      ) : null}
+
+      {isLoading && !species.length ? (
+        <View style={{ paddingHorizontal: 20, paddingTop: 15 }}>
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 50,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 50,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+        </View>
       ) : null}
 
       {species.length ? (

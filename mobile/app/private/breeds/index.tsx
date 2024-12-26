@@ -9,6 +9,7 @@ import { FlatList, RefreshControl, Text, View } from 'react-native';
 import { Card, FAB } from 'react-native-paper';
 import BreedForm from './form';
 import { PageTitle } from '@/components/pagetitle';
+import { Skeleton } from '@/components/skeleton';
 
 const breedProvider: IBreedProvider = new BreedProvider();
 
@@ -61,6 +62,27 @@ const Breeds: React.FC = () => {
     <View style={styles.container}>
       {!breeds.length && !isLoading ? (
         <Empty message=" Nenhuma raça foi cadastrada ainda." />
+      ) : null}
+
+      {isLoading && !breeds.length ? (
+        <View style={{ paddingHorizontal: 20, paddingTop: 15 }}>
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 75,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 75,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+        </View>
       ) : null}
 
       {breeds.length ? (
