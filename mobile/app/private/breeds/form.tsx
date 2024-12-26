@@ -265,6 +265,8 @@ const BreedForm: React.FC<IBreedFormProps> = ({ show, onClose, speciesId }) => {
               mode="contained"
               style={{ marginTop: 30 }}
               onPress={form.handleSubmit(onRegister)}
+              loading={form.formState.isSubmitting}
+              disabled={form.formState.isSubmitting}
             >
               Salvar
             </Button>

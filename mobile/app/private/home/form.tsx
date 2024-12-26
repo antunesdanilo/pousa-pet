@@ -307,6 +307,8 @@ const BoardingForm: React.FC<IBoardingFormProps> = ({ show, onClose }) => {
               mode="contained"
               style={{ marginTop: 30 }}
               onPress={form.handleSubmit(onRegister)}
+              loading={form.formState.isSubmitting}
+              disabled={form.formState.isSubmitting}
             >
               Salvar
             </Button>

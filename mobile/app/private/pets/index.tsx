@@ -9,6 +9,7 @@ import { PetDto } from '@/providers/dtos/pet.dto';
 import { useIsFocused } from '@react-navigation/native';
 import { Empty } from '@/components/empty';
 import { PageTitle } from '@/components/pagetitle';
+import { Skeleton } from '@/components/skeleton';
 
 const petProvider: IPetProvider = new PetProvider();
 
@@ -59,6 +60,27 @@ const Pets: React.FC = () => {
     <View style={styles.container}>
       {!pets.length && !isLoading ? (
         <Empty message="Nenhum pet foi cadastrado ainda." />
+      ) : null}
+
+      {isLoading && !pets.length ? (
+        <View style={{ paddingHorizontal: 20, paddingTop: 15 }}>
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 110,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+          <Skeleton
+            style={{
+              width: '100%',
+              height: 110,
+              borderRadius: 4,
+              marginTop: 20,
+            }}
+          />
+        </View>
       ) : null}
 
       {pets.length ? (
