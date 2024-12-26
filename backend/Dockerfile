@@ -20,9 +20,6 @@ COPY ./ .
 RUN npx prisma generate
 RUN npm run build
 
-# Crias as migrações e inicia o banco de dados com SQLite
-RUN npx prisma migrate dev
-
 # Define o diretório para a versão buildada
 WORKDIR /usr/share/backend/dist
 
